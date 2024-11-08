@@ -130,5 +130,6 @@ dist
 .pnp.*
 
 node_modules
-core.js
-links.js
+#core.js
+#links.js
+#.env
