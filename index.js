@@ -1,18 +1,44 @@
+const emoji = require("node-emoji");
+const emojilib = require("emojilib");
+const fs = require('fs');
+const { Console } = require('console');
+
 const TelegramBot = require('node-telegram-bot-api');
 
-const token = '7055583353:AAGw2ptJJNYGjx4naxqFj4-7ZounnrFFQrw';
+require('dotenv').config();
+
+const {
+  chatIdGrupo } = require('./services.js');
+const { result } = require("lodash");
+
+const {
+  PORT,
+  TOKEN: token,
+  WEBHOOK_DOMAIN: webhookDomain,
+} = process.env;
 
 const bot = new TelegramBot(token, {polling: true});
 
+const fire = emoji.find('🔥');
+const blue_circle = emoji.find('🔵');
+const rotating_light = emoji.find('🚨');
+const mark = emoji.find('📌');
+const dollar = emoji.find('💵');
 
-bot.onText(/\/echo (.+)/, (msg, match) => {
-    // 'msg' is the received Message from Telegram
-    // 'match' is the result of executing the regexp above on the text content
-    // of the message
+
+bot.onText(/\/start/, (msg) => {
+  bot.on("polling_error", console.log);
+  const chatId = chatIdGrupo();
+  bot.sendMessage(chatId, "Bem vindo!"); 
+
+});
+
+bot.onText(/\/teste/, (msg) => {
+  bot.on("polling_error", console.log);
+  const chatId = chatIdGrupo();
+
+  const resposta = `\n ${blue_circle.emoji} teste de mensagem : `;
   
-    const chatId = msg.chat.id;
-    const resp = match[1]; // the captured "whatever"
-  
-    // send back the matched "whatever" to the chat
-    bot.sendMessage(chatId, resp);
+  bot.sendMessage(chatId, resposta);
+
   });
