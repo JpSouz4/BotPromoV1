@@ -6,6 +6,14 @@ const csv = require('csvtojson');
 let csvToJson = require('convert-csv-to-json');
 const axios = require('axios');
 
+//whats
+const { Client, LocalAuth } = require('whatsapp-web.js');
+const qrcode = require('qrcode-terminal');
+
+const client = new Client({
+  authStrategy: new LocalAuth()
+});
+
 const datafeedCSV= './DATA/feedbabytest.csv'
 const datafeed='./DATA/feedbabytest.json'
 
