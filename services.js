@@ -14,8 +14,8 @@ const client = new Client({
   authStrategy: new LocalAuth()
 });
 
-const datafeedCSV= './DATA/feedbabytest.csv'
-const datafeed='./DATA/feedbabytest.json'
+const datafeedCSV = './DATA/feedbabytest.csv'
+const datafeed = './DATA/feedbabytest.json'
 
 
 function randomNumber(min, max) {
@@ -27,10 +27,10 @@ function chatIdGrupo() {
   return chatId
 }
 
-async function convertCSV(i){
-  
+async function convertCSV(i) {
+
   try {
-   
+
     const jsonArrayObj = await csv({
       delimiter: ',',
       noheader: false,
@@ -45,7 +45,7 @@ async function convertCSV(i){
         'ProductLink',
         'OfferLink'
       ]
-    }).fromFile(datafeedCSV); 
+    }).fromFile(datafeedCSV);
 
     console.log(jsonArrayObj[i])
 
@@ -68,8 +68,9 @@ async function convertCSV(i){
   } catch (ex) {
     console.error('Erro ao salvar o JSON:', ex);
   }
-  
+
 }
+
 
 module.exports = {
   randomNumber,
