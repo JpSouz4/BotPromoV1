@@ -15,3 +15,6 @@ https.get(imageUrl, response => {
   fs.unlink(imageName);
   console.error(`Erro ao baixar a imagem: ${err.message}`);
 });
+
+
+--https://blog.rocketseat.com.br/como-criar-um-bot-de-whatsapp-com-javascript-um-guia-pratico/
