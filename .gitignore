@@ -133,4 +133,5 @@ node_modules
 #core.js
 #links.js
 #.env
-./DATA/datafeed.csv
+datafeed.csv
+
