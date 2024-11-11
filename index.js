@@ -9,6 +9,7 @@ require('dotenv').config();
 
 const {
   chatIdGrupo } = require('./services.js');
+
 const { result } = require("lodash");
 
 const {
@@ -27,18 +28,17 @@ const dollar = emoji.find('💵');
 
 
 bot.onText(/\/start/, (msg) => {
-  bot.on("polling_error", console.log);
+  //bot.on("polling_error", console.log);
   const chatId = chatIdGrupo();
   bot.sendMessage(chatId, "Bem vindo!"); 
-
 });
 
 bot.onText(/\/teste/, (msg) => {
-  bot.on("polling_error", console.log);
+  //bot.on("polling_error", console.log);
   const chatId = chatIdGrupo();
 
   const resposta = `\n ${blue_circle.emoji} teste de mensagem : `;
   
   bot.sendMessage(chatId, resposta);
 
-  });
+});
