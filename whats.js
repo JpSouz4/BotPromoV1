@@ -13,9 +13,9 @@ client.on('ready', () => {
     console.log('Bot está pronto!');
 });
 
-client.on('message', message => {
+client.on('message_create', async(message) => {
     if (message.body === '!ping') {
-        message.reply('pong');
+        await message.reply('pong');
     }
 });
 
