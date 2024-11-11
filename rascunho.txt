@@ -1,0 +1,17 @@
+const https = require('https');
+const fs = require('fs');
+
+const imageUrl = 'https://shopee.com.br/product/578869260/21770454471';
+const imageName = 'imagem.jpg';
+
+const file = fs.createWriteStream(imageName);
+https.get(imageUrl, response => {
+  response.pipe(file);
+  file.on('finish', () => {
+    file.close();
+    console.log('Imagem baixada com sucesso!');
+  });
+}).on('error', err => {
+  fs.unlink(imageName);
+  console.error(`Erro ao baixar a imagem: ${err.message}`);
+});
