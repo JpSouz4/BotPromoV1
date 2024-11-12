@@ -27,6 +27,12 @@ function chatIdGrupo() {
   return chatId
 }
 
+async function chatIdWhats() {
+  const groupId = '5518991229015-1616757881@g.us'
+  return groupId
+}
+
+
 async function convertCSV(i) {
 
   try {
@@ -71,9 +77,9 @@ async function convertCSV(i) {
 
 }
 
-
 module.exports = {
   randomNumber,
   chatIdGrupo,
-  convertCSV
+  convertCSV,
+  chatIdWhats
 };
