@@ -9,6 +9,7 @@ const axios = require('axios');
 //whats
 const { Client, LocalAuth } = require('whatsapp-web.js');
 const qrcode = require('qrcode-terminal');
+const { forEach } = require("lodash");
 
 const client = new Client({
   authStrategy: new LocalAuth()
@@ -18,7 +19,32 @@ const datafeedCSV = './DATA/feedbabytest.csv'
 const datafeed = './DATA/feedbabytest.json'
 
 
+
+function enviarItem(tamanhoLista) {
+
+  const lista = Array.from({length: tamanhoLista}, (_, i) => i + 1);
+  let enviados = new Set();
+
+  if (enviados.size >= lista.length) {
+    console.log('Todos os itens já foram enviados.');
+    return;
+  }
+
+  let item;
+  do {
+    item = lista[Math.floor(Math.random() * lista.length)];
+  } while (enviados.has(item));
+
+  enviados.add(item);
+  console.log(`Enviando: ${item}`);
+
+  return item;
+}
+
+
 function randomNumber(min, max) {
+
+
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
@@ -27,7 +53,7 @@ function chatIdGrupo() {
   return chatId
 }
 
-async function convertCSV(i) {
+async function convertCSV() {
 
   try {
 
@@ -47,7 +73,10 @@ async function convertCSV(i) {
       ]
     }).fromFile(datafeedCSV);
 
-    console.log(jsonArrayObj[i])
+    console.log(jsonArrayObj.length)
+
+    let tamanhoLista = jsonArrayObj.length
+    let i = enviarItem(tamanhoLista)
 
     const prodF = {
       ItemId: jsonArrayObj[i].ItemId,
@@ -75,5 +104,6 @@ async function convertCSV(i) {
 module.exports = {
   randomNumber,
   chatIdGrupo,
-  convertCSV
+  convertCSV,
+  enviarItem
 };
