@@ -36,14 +36,8 @@ const client = new Client({
 client.on('ready', async () => {
 
     console.log('Bot on!');
-  
-});
 
-client.initialize();
-
-setInterval(async() => {
-        
-            const message = await convertCSV(randomNumber(1, 100))
+    const message = await convertCSV(randomNumber(1, 100))
                   .then((result) => {
         
                       let valor = (result.Price);
@@ -61,16 +55,15 @@ setInterval(async() => {
                       return resposta
                     })
                 
-            await client.sendMessage(groupId, message).then(response => {
+                    await client.sendMessage(groupId, message).then(response => {
         
                 console.log('Mensagem enviada com sucesso:', message);
         
             }).catch(err => {
                 console.error('Erro ao enviar mensagem:', err);
             });
-
-        }, 300000); //10 min 
-
-
-
+  
+});
+        
+client.initialize();
 
