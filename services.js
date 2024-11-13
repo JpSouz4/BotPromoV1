@@ -28,9 +28,8 @@ function enviarItem(tamanhoLista) {
   if (enviados.size >= lista.length) {
     console.log('Todos os itens já foram enviados.');
     return;
-  }
-
-  let item;
+  } else {
+    let item;
   do {
     item = lista[Math.floor(Math.random() * lista.length)];
   } while (enviados.has(item));
@@ -39,6 +38,8 @@ function enviarItem(tamanhoLista) {
   console.log(`Enviando: ${item}`);
 
   return item;
+  }
+
 }
 
 
@@ -51,6 +52,11 @@ function randomNumber(min, max) {
 function chatIdGrupo() {
   const chatId = '-4563696034'
   return chatId
+}
+
+function groupId() {
+  const WgroupId = '5518991229015-1616757881@g.us'; 
+  return WgroupId
 }
 
 async function convertCSV() {
@@ -72,8 +78,6 @@ async function convertCSV() {
         'OfferLink'
       ]
     }).fromFile(datafeedCSV);
-
-    console.log(jsonArrayObj.length)
 
     let tamanhoLista = jsonArrayObj.length
     let i = enviarItem(tamanhoLista)
@@ -104,6 +108,7 @@ async function convertCSV() {
 module.exports = {
   randomNumber,
   chatIdGrupo,
+  groupId,
   convertCSV,
   enviarItem
 };
