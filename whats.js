@@ -8,6 +8,7 @@ const groupId = '5518991229015-1616757881@g.us';
 
 const {
     convertCSV,
+    enviarItem,
     randomNumber,
     chatIdGrupo, } = require('./services.js');
 
@@ -36,8 +37,20 @@ const client = new Client({
 client.on('ready', async () => {
 
     console.log('Bot on!');
+  
+});
 
-    const message = await convertCSV(randomNumber(1, 100))
+client.initialize();
+
+
+async function verificarEstado() {
+
+    const state = await client.getState();
+    console.log('Estado atual do bot:', state);
+
+    if (state === 'CONNECTED') {
+        
+        const message = await convertCSV()
                   .then((result) => {
         
                       let valor = (result.Price);
@@ -62,8 +75,10 @@ client.on('ready', async () => {
             }).catch(err => {
                 console.error('Erro ao enviar mensagem:', err);
             });
-  
-});
-        
-client.initialize();
 
+    } else if (state === 'DISCONNECTED') {
+        console.log('Bot está desconectado.');
+    }
+};
+        
+setInterval(verificarEstado, 60000);
