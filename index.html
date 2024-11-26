@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Botões com Node.js</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+        main {
+            padding: 20px;
+            text-align: center;
+        }
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+    </style>
+
+</head>
+<body>
+    <header>
+        <h1>Botões com Node.js</h1>
+    </header>
+    <main>
+
+        <form id="uploadForm" enctype="multipart/form-data">
+            <input type="file" id="csvFile" name="csvFile" accept=".csv" required>
+            <button type="submit">Upload</button>
+        </form>
+
+        <button onclick="chamarFuncao1()">Chamar Função 1</button>
+        <button onclick="chamarFuncao2()">Chamar Função 2</button>
+    </main>
+    <footer>
+        <p>© 2024 Botões com Node.js</p>
+    </footer>
+
+    <script>
+
+document.getElementById('uploadForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const formData = new FormData();
+            const fileField = document.getElementById('csvFile');
+
+            formData.append('csvFile', fileField.files[0]);
+
+            const response = await fetch('/upload', {
+                method: 'POST',
+                body: formData
+            });
+
+            const result = await response.json();
+            alert(result.message);
+        });
+
+        async function chamarFuncao1() {
+            const response = await fetch('/funcao1', { method: 'POST' });
+            const result = await response.json();
+            alert(result.message);
+        }
+
+        async function chamarFuncao2() {
+            const response = await fetch('/funcao2', { method: 'POST' });
+            const result = await response.json();
+            alert(result.message);
+        }
+    </script>
+</body>
+</html>
